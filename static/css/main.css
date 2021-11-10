@@ -1,0 +1,52 @@
+body { 
+    background: linear-gradient(to left top, rgb(234, 245, 141), rgb(216, 125, 119)) fixed;
+    display: block;
+    margin-top: 0.75em;
+    font-size: 1.75em;
+    text-align: center;
+    font-weight: thick;
+    color: rgb(0, 0, 0);
+}
+
+p.author{
+    font-size: 1em;
+    margin-top: 0.2em;
+    margin-bottom: 1em;
+    margin-left: 15em;
+    margin-right: 0;
+    font-weight: thick;
+    font-style: italic;
+    color: white;
+}
+
+table, td, th {
+    border: 1px solid rgb(0, 0, 0);
+    align-self: center;
+}
+
+table {
+    border-collapse: collapse;
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1em;
+}
+
+th {
+    height: 30px;
+}
+
+td {
+    text-align: center;
+    padding: 5px;
+}
+
+h2 {
+    font-size: 0.75em;
+    display: inline;
+}
+
+.main_link { 
+    color: black;
+    text-decoration: none;
+}

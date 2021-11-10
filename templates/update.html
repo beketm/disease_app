@@ -1,0 +1,45 @@
+{% extends 'base.html'%}
+
+{% block head %}
+{% endblock %}
+
+{% block body %}
+
+<h1>Update a Record</h1>
+
+<div class='form'>
+    <form action="/update" method="POST">
+        <h2>Insert your email</h2>
+        <input type="text" name="email" ><br>
+        <h2>Insert your password</h2>
+        <input type="password" name="password" ><br>
+        <h2>Insert Record ID </h2>
+        <input type="text" name="record_id" ><br>
+
+        <p>Insert only into fields that you want to update. Leave the rest blank</p>
+        
+        <h2>Insert country </h2>
+        <select data-placeholder="Begin typing a name to filter..."  name="cname">
+            <option value=""></option>
+            {% for country in countries%}
+                <option>{{ country.cname}}</option>
+            {% endfor %}
+        </select><br>
+        <h2>Insert disease</h2>
+        <select data-placeholder="Begin typing a name to filter..."  name="disease">
+            <option value=""></option>
+            {% for disease in diseases%}
+                <option>{{ disease_code_dict[disease.disease_code]}}</option>
+            {% endfor %}
+        </select><br>
+        <h2>Insert total deaths</h2>
+        <input type="text" name="total_deaths" value=""><br>
+        <h2>Insert total patients</h2>
+        <input type="text" name="total_patients" value=""><br>
+
+
+        <input type="submit" value="Submit">
+    </form>
+</div>
+
+{% endblock %}

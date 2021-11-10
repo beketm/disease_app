@@ -1,0 +1,23 @@
+{% extends 'base.html'%}
+
+{% block head %}
+{% endblock %}
+
+{% block body %}
+
+<h1>Delete a Record</h1>
+
+<div class='form'>
+    <form action="/delete" method="POST">
+        <h2>Insert your email</h2>
+        <input type="text" name="email" ><br>
+        <h2>Insert your password</h2>
+        <input type="password" name="password" ><br>
+        <h2>Insert Record ID </h2>
+        <input type="text" name="record_id" ><br>
+
+        <input type="submit" value="Submit">
+    </form>
+</div>
+
+{% endblock %}

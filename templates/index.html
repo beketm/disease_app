@@ -1,0 +1,56 @@
+{% extends 'base.html'%}
+
+{% block head %}
+{% endblock %}
+
+{% block body %}
+
+
+<div class='content'>
+    <h1>Diseases' records Worldwide</h1>
+    <table>
+        <tr>
+            <th>Record ID</th>
+            <th>Country</th>
+            <th>Disease</th>
+            <th>Total Deaths</th>
+            <th>Total Patients</th>
+        </tr>
+        {% for record in records %}
+        <tr id='{{record.record_id}}'>
+            <td>{{ record.record_id }}</td>
+            <td>{{ record.cname }}</td>
+            <td>{{ disease_code_dict[record.disease_code] }}</td>
+            <td>{{ record.total_deaths }}</td>
+            <td>{{ record.total_patients }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<div class='form'>
+    <form action="/" method="POST">
+        <h2>Select a country: </h2>
+        <select data-placeholder="Begin typing a name to filter..."  name="cname">
+            <option value=""></option>
+            {% for country in countries%}
+                <option>{{ country.cname}}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <h2>Select a disease: </h2>
+        <select data-placeholder="Begin typing a name to filter..."  name="disease">
+            <option value=""></option>
+            {% for disease in diseases%}
+                <option>{{ disease_code_dict[disease.disease_code]}}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+</div>
+<a href="delete">Delete a record</a><br>
+<a href="update">Update a record</a><br>
+<a href="insert">Insert a new record</a>
+
+{% endblock %}
