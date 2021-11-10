@@ -7,7 +7,8 @@ credentials =  {'user':'postgres',
                 'host':'localhost',
                 'port': '5432',
                 'database': 'copy_homework2'}
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://{user}:{password}@{host}:{port}/{database}".format(**credentials)
+# app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://{user}:{password}@{host}:{port}/{database}".format(**credentials)
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://asewvcjf:3B8jeP-JHvJlu8SCvzYRQoa2oSwXb-oP@john.db.elephantsql.com/asewvcjf"
 db = SQLAlchemy(app)
 
 disease_code_dict = {'TUBE':'Tuberculosis', 'COV19':'Covid-19', 'EBOL':'Ebola', 'GONR': 'Gonorrhea', 'DENG': 'Dengue', 'ALZH':'Alzheimers', 'DIPH':'Diphtheria', 'BUBO':'Bubonic', 'MLRA':'Malaria', 'STRK': 'Stroke'}
@@ -165,10 +166,14 @@ def insert():
                 message = "Wrong total patients. Try again!"
                 return render_template("wrong_input.html", message=message), {"Refresh": "2; url=/insert"}
             
-            connection.execute(f"INSERT INTO record(email, cname, disease_code, total_deaths, total_patients) VALUES('{email}', '{country}', '{inv_disease_code_dict.get(disease)}', {total_deaths}, {total_patients});")
-
+            try:
+                connection.execute(f"INSERT INTO record(email, cname, disease_code, total_deaths, total_patients) VALUES('{email}', '{country}', '{inv_disease_code_dict.get(disease)}', {total_deaths}, {total_patients});")
+            except Exception as e:
+                message = "Country and disease combination already exists in the table for your email. If you want to change the row, just update it."
+                return render_template("wrong_input.html", message=message), {"Refresh": "2; url=/update"}
+            
             message = ", ".join([email, country, disease, total_deaths, total_patients]) + " successfully added to the database!"
-            return render_template("wrong_input.html", message=message), {"Refresh": "2; url=/"}
+            return render_template("wrong_input.html", message=message), {"Refresh": "5; url=/"}
  
     else:
         return render_template('insert.html',countries=countries, diseases= diseases, disease_code_dict=disease_code_dict)
